@@ -1,3 +1,22 @@
+* {
+  color: #00ffaa;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .logo {
-  background-color: rgba(rgba(255, 255, 255, 0));
+  width: 30vw;
+  max-width: 300px;
+  height: auto;
+}
+
+.nav-bar {
+  color: #00ffaa;
 }
