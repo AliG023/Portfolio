@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   preview: {
     allowedHosts: [
-      'https://ali-graham-portfolio.onrender.com'
+      "https://ali-graham-portfolio.onrender.com"
     ]
   }
 })
