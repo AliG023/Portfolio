@@ -54,6 +54,27 @@
   flex-direction: column;
 }
 
+.project1-pic {
+  width: 150px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project2-pic {
+  width: 200px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project3-pic {
+  width: 200px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .project-description {
   color: #333;
   line-height: 1.6;

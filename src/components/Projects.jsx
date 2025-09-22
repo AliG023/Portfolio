@@ -1,4 +1,7 @@
 import './Project.css';
+import AGLogo from '../assets/AG-logo.svg';
+import Proj2 from '../assets/project2-pic.jpg';
+import Proj3 from '../assets/project3-pic.jpg';
 
 export default function Projects() {
     // Function to open links
@@ -18,6 +21,7 @@ export default function Projects() {
                                 <h3>Personal Portfolio Website</h3>
                             </div>
                             <div className='card-content'>
+                                <img className='project1-pic' src={AGLogo} alt="Project 1 Picture" />
                                 <p className='project-description'>
                                     A responsive React-based portfolio showcasing modern web development skills with clean UI/UX design and interactive components.
                                 </p>
@@ -48,6 +52,7 @@ export default function Projects() {
                                 <h3>Drag & Drop Checkers Game</h3>
                             </div>
                             <div className='card-content'>
+                                <img className='project2-pic' src={Proj2} alt="Project 2 Picture" />
                                 <p className='project-description'>
                                     A browser-based checkers game with intuitive drag-and-drop play using vanilla JavaScript. Includes move validation, trash collection and JavaScript alerts.
                                 </p>
@@ -78,6 +83,7 @@ export default function Projects() {
                                 <h3>Mock Web Hosting Site</h3>
                             </div>
                             <div className='card-content'>
+                                <img className='project3-pic' src={Proj3} alt="Project 3 Picture" />
                                 <p className='project-description'>
                                     A sleek, responsive mock web site for Web Hosting Canada using HTML, CSS, and JavaScript. Focused on clean UI, semantic structure, and interactive elements.
                                 </p>
