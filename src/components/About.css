@@ -6,5 +6,13 @@
 }
 
 .intro {
-  width: 70vw;
+  background-color: #6e6e6e;
+  border-radius: 20px;
+  width: 80%;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.attachment {
+  width: 80%;
 }

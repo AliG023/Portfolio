@@ -1,0 +1,162 @@
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.projects-container h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #00ffaa;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.project-card {
+  background: #cacaca;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 255, 170, 0.2);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #00ffaa, #00cc88);
+  padding: 20px;
+  text-align: center;
+}
+
+.card-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.card-content {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-description {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tech-tag {
+  background: #f0f0f0;
+  color: #333;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid #ddd;
+}
+
+.card-footer {
+  padding: 20px 25px;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid #eee;
+}
+
+.project-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.project-btn:not(.secondary) {
+  background: #00ffaa;
+  color: #333;
+}
+
+.project-btn:not(.secondary):hover {
+  background: #00cc88;
+  transform: translateY(-2px);
+}
+
+.project-btn.secondary {
+  background: transparent;
+  color: #00ffaa;
+  border: 2px solid #00ffaa;
+}
+
+.project-btn.secondary:hover {
+  background: #00ffaa;
+  color: #333;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .projects-container {
+    padding: 15px;
+  }
+
+  .projects-container h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .card-footer {
+    flex-direction: column;
+  }
+
+  .project-btn {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    min-height: auto;
+  }
+
+  .card-header {
+    padding: 15px;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-footer {
+    padding: 15px 20px;
+  }
+}

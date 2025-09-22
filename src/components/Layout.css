@@ -3,6 +3,13 @@
   font-family: Arial, sans-serif;
   font-weight: bold;
 }
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #6e6e6e;
+  padding: 10px;
+}
 
 .logo-container {
   display: flex;
@@ -12,11 +19,12 @@
 }
 
 .logo {
-  width: 30vw;
-  max-width: 300px;
+  width: 15vw;
+  max-width: 200px;
   height: auto;
 }
 
 .nav-bar {
   color: #00ffaa;
+  text-align: right;
 }

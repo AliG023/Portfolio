@@ -1,3 +1,21 @@
+.page {
+  display: flex;
+  justify-content: center;
+}
+
+.hello {
+  background-color: #6e6e6e;
+  border-radius: 20px;
+  width: 80%;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
 .mission-statement {
-  width: 60vw;
+  padding-top: 50px;
+  width: 80%;
+  text-align: center;
+  background-color: #6e6e6e;
+  border-radius: 20px;
+  padding: 20px;
 }
