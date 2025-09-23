@@ -2,7 +2,7 @@ import './Services.css'
 import { Link } from 'react-router-dom';
 import FS_Dev from '../assets/Fullstack Dev.png';
 import BE_Dev from '../assets/Backend Dev.png';
-import WA_Des from '../assets/Webapp Design.png';
+import WA_Des from '../assets/WebApp Design.png';
 
 export default function Services() {
     return(
