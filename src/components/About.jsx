@@ -1,6 +1,6 @@
 import './About.css';
 import resume from '../assets/Alastair Graham - Resume.pdf';
-import head_shot from '../assets/head-shot.jpg';
+import head_shot from '../assets/head-shot.png';
 export default function About() {
     return (
         <>
