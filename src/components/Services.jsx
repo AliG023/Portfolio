@@ -24,7 +24,6 @@ export default function Services() {
                                 <div className='tech-stack'>
                                     <span className='tech-tag'>C#</span>
                                     <span className='tech-tag'>JavaScript</span>
-                                    <span className='tech-tag'>Python</span>
                                 </div>
                             </div>
                             <div className='services-card-footer'>

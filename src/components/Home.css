@@ -19,3 +19,9 @@
   border-radius: 20px;
   padding: 20px;
 }
+
+.about-link {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #00ffaa;
+}
