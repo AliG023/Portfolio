@@ -27,7 +27,8 @@ const EducationSchema = new mongoose.Schema({
         required: 'Completion Date is required'
     },
     description: {
-        type: String
+        type: String,
+        required: 'Description is required'
     }
 });
 
