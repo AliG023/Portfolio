@@ -4,14 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"vite\" \"nodemon ../server/server.js\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
+    "concurrently": "^9.2.1",
     "mongodb": "^6.20.0",
     "mongoose": "^8.19.1",
+    "nodemon": "^3.1.10",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.2"
