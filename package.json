@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix client\" \"nodemon server/server.js\"",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview --host 0.0.0.0"
+    "name": "React-portfolio",
+    "type": "module",
+    "main": "index.js",
+    "dev": "concurrently \"npm run dev --prefix client\" \"nodemon server/server.js\""
   },
   "dependencies": {
     "concurrently": "^9.2.1",
