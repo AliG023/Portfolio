@@ -4,16 +4,18 @@ import {
     getAllEducation,
     getEducationById,
     updateEducationById,
+    deleteAllEducation,
     deleteEducationById
 } from '../controllers/education.controller.js'
 
 const EducationRouter = express.Router();
 
 // REST API
-EducationRouter.post('/', createEducation);
-EducationRouter.get('/', getAllEducation);
-EducationRouter.get('/:id', getEducationById);
-EducationRouter.put('/:id', updateEducationById);
-EducationRouter.delete('/:id', deleteEducationById);
+EducationRouter.post('api/education', createEducation);
+EducationRouter.get('api/education', getAllEducation);
+EducationRouter.get('api/education/:id', getEducationById);
+EducationRouter.put('api/education/:id', updateEducationById);
+EducationRouter.delete('api/education', deleteAllEducation);
+EducationRouter.delete('api/education/:id', deleteEducationById);
 
 export default EducationRouter;

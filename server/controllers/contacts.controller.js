@@ -47,6 +47,16 @@ export const updateContactById = async (req, res) => {
     }
 }
 
+// DELETE ALL CONTACTS
+export const deleteAllContacts = async (req, res) => {
+    try {
+        const contacts = await contactsModel.deleteMany({});
+        res.status(200).json({ message: `${contacts.deletedCount} contacts deleted successfully` });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 // DELETE CONTACT BY ID
 export const deleteContactById = async (req, res) => {
     try {

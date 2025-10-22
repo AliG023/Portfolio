@@ -22,7 +22,7 @@ const EducationSchema = new mongoose.Schema({
         match: [/.+\@.+\..+/, 'Please fill a valid email address'],
         required: 'Email is required'
     },
-    date: {
+    completion: {
         type: Date,
         required: 'Completion Date is required'
     },

@@ -47,6 +47,16 @@ export const updateProjectById = async (req, res) => {
     }
 }
 
+// DELETE ALL PROJECTS
+export const deleteAllProjects = async (req, res) => {
+    try {
+        const projects = await projectModel.deleteMany({});
+        res.status(200).json({message: `${projects.deletedCount} projects deleted successfully`})
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 // DELETE PROJECT BY ID
 export const deleteProjectById = async (req, res) => {
     try {

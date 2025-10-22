@@ -47,6 +47,16 @@ export const updateEducationById = async (req, res) => {
     }
 }
 
+// DELETE ALL EDUCATION
+export const deleteAllEducation = async (req, res) => {
+    try {
+        const educations = await educationModel.deleteMany({});
+        res.status(200).json({ message: `${educations.deletedCount} education records deleted successfully` });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 // DELETE EDUCATION BY ID
 export const deleteEducationById = async (req, res) => {
     try {

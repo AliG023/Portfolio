@@ -24,7 +24,7 @@ throw new Error(`unable to connect to MongoDB: ${config.mongoUri}`)
 });
 
 app.get("/", (req, res) => {
-res.json({ message: "Welcome to User application." });
+res.json({ message: "Welcome to My Portfolio application." });
 });
 
 app.listen(config.port, (err) => { 

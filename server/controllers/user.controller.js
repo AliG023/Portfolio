@@ -47,6 +47,16 @@ export const updateUserById = async (req, res) => {
     }
 }
 
+// DELETE ALL USERS
+export const deleteAllUsers = async (req, res) => {
+    try {
+        const users = await userModel.deleteMany({});
+        res.status(200).json({ message: `${users.deletedCount} users deleted successfully` });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 // DELETE USER BY ID
 export const deleteUserById = async (req, res) => {
     try {

@@ -4,16 +4,18 @@ import {
     getAllUsers,
     getUserById,
     updateUserById,
+    deleteAllUsers,
     deleteUserById
 } from '../controllers/user.controller.js'
 
 const UserRouter = express.Router();
 
 // REST API
-UserRouter.post('/', createUser);
-UserRouter.get('/', getAllUsers);
-UserRouter.get('/:id', getUserById);
-UserRouter.put('/:id', updateUserById);
-UserRouter.delete('/:id', deleteUserById);
+UserRouter.post('api/users', createUser);
+UserRouter.get('api/users', getAllUsers);
+UserRouter.get('api/users/:id', getUserById);
+UserRouter.put('api/users/:id', updateUserById);
+UserRouter.delete('api/users', deleteAllUsers);
+UserRouter.delete('api/users/:id', deleteUserById);
 
 export default UserRouter;
