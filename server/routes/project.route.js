@@ -1,21 +1,14 @@
 import express from 'express'
-import {
-    createProject,
-    getAllProjects,
-    getProjectById,
-    updateProjectById,
-    deleteAllProjects,
-    deleteProjectById
-} from '../controllers/project.controller.js'
+import projectController from '../controllers/project.controller.js'
 
 const ProjectRouter = express.Router();
 
 // REST API
-ProjectRouter.post('api/projects', createProject);
-ProjectRouter.get('api/projects', getAllProjects);
-ProjectRouter.get('api/projects/:id', getProjectById);
-ProjectRouter.put('api/projects/:id', updateProjectById);
-ProjectRouter.delete('api/projects', deleteAllProjects);
-ProjectRouter.delete('api/projects/:id', deleteProjectById);
+ProjectRouter.post('api/projects', projectController.createProject);
+ProjectRouter.get('api/projects', projectController.getAllProjects);
+ProjectRouter.get('api/projects/:id', projectController.getProjectById);
+ProjectRouter.put('api/projects/:id', projectController.updateProjectById);
+ProjectRouter.delete('api/projects', projectController.deleteAllProjects);
+ProjectRouter.delete('api/projects/:id', projectController.deleteProjectById);
 
 export default ProjectRouter;

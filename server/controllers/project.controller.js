@@ -69,3 +69,5 @@ export const deleteProjectById = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+export default { createProject, getAllProjects, getProjectById, updateProjectById, deleteAllProjects, deleteProjectById };

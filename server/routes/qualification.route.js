@@ -1,21 +1,14 @@
 import express from 'express'
-import {
-    createQualification,
-    getAllQualifications,
-    getQualificationById,
-    updateQualificationById,
-    deleteAllQualifications,
-    deleteQualificationById
-} from '../controllers/qualifications.controller.js'
+import qualificationController from '../controllers/qualifications.controller.js'
 
 const QualificationsRouter = express.Router();
 
 // REST API
-QualificationsRouter.post('api/qualifications', createQualification);
-QualificationsRouter.get('api/qualifications', getAllQualifications);
-QualificationsRouter.get('api/qualifications/:id', getQualificationById);
-QualificationsRouter.put('api/qualifications/:id', updateQualificationById);
-QualificationsRouter.delete('api/qualifications', deleteAllQualifications);
-QualificationsRouter.delete('api/qualifications/:id', deleteQualificationById);
+QualificationsRouter.post('/api/qualifications', qualificationController.createQualification);
+QualificationsRouter.get('/api/qualifications', qualificationController.getAllQualifications);
+QualificationsRouter.get('/api/qualifications/:id', qualificationController.getQualificationById);
+QualificationsRouter.put('/api/qualifications/:id', qualificationController.updateQualificationById);
+QualificationsRouter.delete('/api/qualifications', qualificationController.deleteAllQualifications);
+QualificationsRouter.delete('/api/qualifications/:id', qualificationController.deleteQualificationById);
 
 export default QualificationsRouter;

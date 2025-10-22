@@ -69,3 +69,5 @@ export const deleteQualificationById = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+export default { createQualification, getAllQualifications, getQualificationById, updateQualificationById, deleteAllQualifications, deleteQualificationById };  
