@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const EducationSchema = new mongoose.Schema({
+const QualificationSchema = new mongoose.Schema({
     title: {
         type: String,
         trim: true,
@@ -32,4 +32,4 @@ const EducationSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.model('Education', EducationSchema);
+export default mongoose.model('Qualifications', QualificationSchema);

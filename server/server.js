@@ -5,7 +5,7 @@ import app from './express.js'
 import mongoose from 'mongoose'
 import ProjectRouter from './routes/project.route.js'
 import UserRouter from './routes/user.route.js'
-import EducationRouter from './routes/education.route.js'
+import QualificationsRouter from './routes/qualification.route.js'
 import ContactsRouter from './routes/contacts.route.js'
 
 
@@ -38,6 +38,6 @@ console.info('Server started on port %s.', config.port)
 app.use(express.json());
 app.use('/api/projects', ProjectRouter);
 app.use('/api/users', UserRouter);  
-app.use('/api/education', EducationRouter);
+app.use('/api/qualifications', QualificationsRouter);
 app.use('/api/contacts', ContactsRouter);
 
