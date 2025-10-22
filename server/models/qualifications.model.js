@@ -24,7 +24,7 @@ const QualificationSchema = new mongoose.Schema({
     },
     completion: {
         type: Date,
-        required: 'Completion Date is required'
+        default: Date.now
     },
     description: {
         type: String,

@@ -36,8 +36,8 @@ console.info('Server started on port %s.', config.port)
 
 // ROUTES
 app.use(express.json());
-app.use('/api/projects', ProjectRouter);
-app.use('/api/users', UserRouter);  
-app.use('/api/qualifications', QualificationsRouter);
-app.use('/api/contacts', ContactsRouter);
+app.use('/', ProjectRouter);
+app.use('/', UserRouter);  
+app.use('/', QualificationsRouter);
+app.use('/', ContactsRouter);
 
