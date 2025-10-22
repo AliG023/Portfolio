@@ -1,9 +1,12 @@
 {
+   "name": "React-portfolio",
+  "type": "module",
+  "main": "index.js",
   "scripts": {
-    "name": "React-portfolio",
-    "type": "module",
-    "main": "index.js",
-    "dev": "concurrently \"npm run dev --prefix client\" \"nodemon server/server.js\""
+    "dev": "concurrently \"npm run dev --prefix client\" \"nodemon server/server.js\"",
+    "build": "npm run build --prefix client",
+    "start": "node server/server.js",
+    "preview": "npm run preview --prefix client -- --host 0.0.0.0"
   },
   "dependencies": {
     "concurrently": "^9.2.1",
