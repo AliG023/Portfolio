@@ -5,7 +5,7 @@ export const createUser = async (req, res) => {
     try {
         const newUser = new userModel(req.body);
         const savedUser = await newUser.save();
-        res.status(200).json(savedUser);
+        res.status(200).json({ user: savedUser, token });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
