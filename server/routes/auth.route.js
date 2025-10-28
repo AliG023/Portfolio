@@ -3,7 +3,8 @@ import authController from '../controllers/auth.controller.js'
 
 const AuthRouter = express.Router()
 
-AuthRouter.route('/auth/signin').post(authController.signin);
-AuthRouter.route('/auth/signout').get(authController.signout);
+// REST API
+AuthRouter.post('/auth/signin', authController.signin);
+AuthRouter.get('/auth/signout', authController.signout);
 
 export default AuthRouter;

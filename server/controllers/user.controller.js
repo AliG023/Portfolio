@@ -5,7 +5,7 @@ export const createUser = async (req, res) => {
     try {
         const newUser = new userModel(req.body);
         const savedUser = await newUser.save();
-        res.status(200).json({ user: savedUser, token });
+        res.status(200).json({ id: savedUser.id, name: savedUser.name, email: savedUser.email });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -51,6 +51,7 @@ export const updateUserById = async (req, res) => {
 export const deleteAllUsers = async (req, res) => {
     try {
         const users = await userModel.deleteMany({});
+        console.log(users);
         res.status(200).json({ message: `${users.deletedCount} users deleted successfully` });
     } catch (error) {
         res.status(500).json({ message: error.message });

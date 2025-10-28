@@ -2,8 +2,6 @@ import User from '../models/user.model.js'
 import generateToken from '../utils/jwt.js'
 import config from '../config/config.js'
 import jwt from 'jsonwebtoken'
-// import { expressjwt as expressJwt } from 'express-jwt'
-
 
 const signin = async (req, res) => {
     try {
@@ -28,16 +26,14 @@ const signout = async (req, res) => {
     return res.json({ message: "Signout success!" });
 }
 
-// const requireSignin = expressJwt({ secret: process.env.JWT_SECRET, algorithms: ['HS256'], userProperty: 'auth' });
 const requireSignin = (req, res, next) => {
-    console.log(req.cookies);
     const token = req.cookies.t;
     if (!token) return res.status(401).json({ error: 'Unauthorized access' });
     try {
         jwt.verify(token, config.jwtSecret, (err, decoded) => {
             if (err) return res.status(401).json({ error: 'Unauthorized access' });
             req.auth = decoded;
-            next();
+            return next();
         });
     } catch (err) {
         return res.status(401).json({ error: 'Unauthorized access'
@@ -45,12 +41,11 @@ const requireSignin = (req, res, next) => {
     }
 }
 
-const hasAuthorization = (req, res) => {
-    const authorized = req.profile && req.auth && req.profile._id === req.auth._id;
-    if (!authorized) {
-        return res.status(403).json({ error: "User is not authorized" });
-    }
+const hasAuthorization = (req, res, next) => {
+    if (!req.auth) return res.status(401).json({ error: 'Unauthorized access' });
+    const authorized = req.params && (req.params.id || req.params._id || req.params.userId);
+    if (!authorized) return res.status(400).json({ error: 'Missing user id parameter' });
     next();
-}
+};
 
 export default { signin, signout, requireSignin, hasAuthorization };
