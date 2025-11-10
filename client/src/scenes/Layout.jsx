@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import AGLogo from '../assets/AG-logo.svg';
-import './Layout.css';
+import '../styles/Layout.css';
 
 export default function Layout() {
     return (

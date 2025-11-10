@@ -1,4 +1,4 @@
-import './Project.css';
+import '../styles/Project.css';
 import AGLogo from '../assets/AG-logo.svg';
 import Proj2 from '../assets/project2-pic.jpg';
 import Proj3 from '../assets/project3-pic.jpg';

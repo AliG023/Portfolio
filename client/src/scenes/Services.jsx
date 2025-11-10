@@ -1,4 +1,4 @@
-import './Services.css'
+import '../styles/Services.css';
 import { Link } from 'react-router-dom';
 import FS_Dev from '../assets/Fullstack Dev.png';
 import BE_Dev from '../assets/Backend Dev.png';

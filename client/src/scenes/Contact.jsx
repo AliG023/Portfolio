@@ -1,4 +1,4 @@
-import './Contact.css'
+import '../styles/Contact.css';
 
 // This function handles the Contact form submission click and data capture
 export default function Contact () {
