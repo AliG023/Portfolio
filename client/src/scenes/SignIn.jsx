@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const authUrl = '/auth';
+
 const SignIn = () => {
     // State for form data
     const [form, setForm] = useState({
@@ -26,7 +28,7 @@ const SignIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/auth/signin', {
+            const response = await fetch(`${authUrl}/signin`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

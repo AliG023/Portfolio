@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = '/api';
+
 const SignUp = () => {
     // State for form data
     const [form, setForm] = useState({
@@ -26,7 +28,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/users', {
+            const response = await fetch(`${apiUrl}/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
