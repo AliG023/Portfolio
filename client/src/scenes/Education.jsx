@@ -72,6 +72,9 @@ export default function Education () {
                             </tbody>
                         </table>
                     </div>
+                    <div>
+                        <button className='Add' onClick={openModal}> Add Education </button>
+                    </div>
                     <h3>Additional Skills & Certifications</h3>
                     <div className='skills-table'>
                         <table>
@@ -98,7 +101,7 @@ export default function Education () {
                     </div>
                 </div>
                 <div>
-                    <button className='Add' onClick={openModal}> Add Education </button>
+                    <button className='Add' onClick={openModal}> Add Certificate </button>
                 </div>
             </div>
 
@@ -107,31 +110,6 @@ export default function Education () {
                     <div className="modal-card" onClick={(e) => e.stopPropagation()}>
                         <h2>Add Education</h2>
                         <form onSubmit={handleSave} className="modal-form">
-                            <label>
-                                Type
-                                <div className="radio-group">
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="type"
-                                            value="postsecondary"
-                                            checked={form.type === 'postsecondary'}
-                                            onChange={handleChange}
-                                        />
-                                        Post Secondary
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="type"
-                                            value="skills"
-                                            checked={form.type === 'skills'}
-                                            onChange={handleChange}
-                                        />
-                                        Additional Cert
-                                    </label>
-                                </div>
-                            </label>
                             <label>
                                 Subject
                                 <input name="subject" value={form.subject} onChange={handleChange} />

@@ -18,7 +18,7 @@ export default function Layout() {
     // Update user state when localStorage changes
     useEffect (() => {
         setUser(getUserFromStorage());
-    });
+    },[]);
 
     // Function to handle user logout
     const handleLogout = () => {

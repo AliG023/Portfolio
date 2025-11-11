@@ -1,4 +1,4 @@
-
+import generateToken from "../utils/jwt.js";
 import userModel from "../models/user.model.js"
 
 // CREATE NEW USER

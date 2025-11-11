@@ -40,7 +40,7 @@ const SignIn = () => {
             }
 
             const data = await response.json();
-
+            console.log('Sign In Response:', data);
             // Set Token and Username in localStorage
             localStorage.setItem('token', data.token);
             localStorage.setItem('username', data.user.username);
