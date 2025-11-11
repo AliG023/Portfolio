@@ -13,28 +13,15 @@
       "dev": "concurrently \"npm run dev --prefix client\" \"nodemon server/server.js\"",
       "build": "npm run build --prefix client",
       "start": "node server/server.js",
-      "preview": "npm run preview --prefix client -- --host 0.0.0.0"
+      "preview": "npm run preview --prefix client -- --host 0.0.0.0",
+      "type": "module",
+      "main": "index.js"
    },
    "dependencies": {
-      "bcrypt": "^6.0.0",
-      "body-parser": "^2.2.0",
-      "compression": "^1.8.0",
       "concurrently": "^9.2.1",
-      "cookie-parser": "^1.4.7",
-      "cors": "^2.8.5",
-      "crypto": "^1.0.1",
       "dotenv": "^17.2.3",
-      "express": "^5.1.0",
-      "express-jwt": "^8.5.1",
-      "global": "^4.4.0",
-      "helmet": "^8.1.0",
-      "jsonwebtoken": "^9.0.2",
       "mongodb": "^6.20.0",
-      "mongoose": "^8.19.1",
-      "morgan": "^1.10.1",
-      "react": "^19.1.1",
-      "react-dom": "^19.1.1",
-      "react-router-dom": "^7.8.2",
+      "nodemon": "^3.1.10",
       "vite": "^7.1.11"
    },
    "devDependencies": {
