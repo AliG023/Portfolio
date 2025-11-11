@@ -68,12 +68,12 @@ export default function Projects() {
 
     const handleProjectSave = (e) => {
         e.preventDefault();
-        if (!projectForm.title.trim()) return; // minimal validation
+        if (!projectForm.title.trim()) return; 
 
         const newProject = {
             title: projectForm.title.trim(),
             description: projectForm.description.trim(),
-            image: projectForm.image.trim(), // allow URL or leave empty
+            image: projectForm.image.trim(),
             liveUrl: projectForm.liveUrl.trim(),
             codeUrl: projectForm.codeUrl.trim(),
             tech: projectForm.tech

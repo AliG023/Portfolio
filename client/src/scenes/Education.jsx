@@ -40,7 +40,6 @@ export default function Education () {
 
         setEducationList(prev => [newEntry, ...prev]);
 
-        // reset form and close
         setForm({ type: 'postsecondary', subject: '', school: '', dates: '' });
         closeModal();
     }
