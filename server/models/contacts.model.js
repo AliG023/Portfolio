@@ -1,21 +1,30 @@
 import mongoose from 'mongoose'
 
 const ContactsSchema = new mongoose.Schema({
-    firstname: {
+    name: {
         type: String,
         trim: true,
-        required: 'First Name is required'
+        required: 'Name is required'
     },
-    lastname: {
+    phone: {
         type: String,
         trim: true,
-        required: 'Last Name is required'
+        required: 'Phone is required'
     },
     email: {
         type: String,
         trim: true,
         match: [/.+\@.+\..+/, 'Please fill a valid email address'],
         required: 'Email is required'
+    },
+    subject: {
+        type: String,
+        trim: true,
+        required: 'Subject is required'
+    },
+    message:{
+        type: String,
+        required: 'Message is required'
     }
 });
 

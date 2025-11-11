@@ -17,7 +17,7 @@ export default function Projects() {
         image: '',
         liveUrl: '',
         codeUrl: '',
-        techs: ''
+        tech: ''
     });
 
     const [projects, setProjects] = useState([
@@ -27,7 +27,7 @@ export default function Projects() {
             image: AGLogo,
             liveUrl: 'https://ali-graham-portfolio.onrender.com',
             codeUrl: 'https://github.com/AliG023/Portfolio',
-            techs: ['React', 'CSS', 'JavaScript']
+            tech: ['React', 'CSS', 'JavaScript']
         },
         {
             title: 'Drag & Drop Checkers Game',
@@ -35,7 +35,7 @@ export default function Projects() {
             image: Proj2,
             liveUrl: 'https://alig023.github.io/COMP125/Assignment04/',
             codeUrl: 'https://github.com/AliG023/COMP125/tree/main/Assignment04',
-            techs: ['HTML', 'CSS', 'JavaScript']
+            tech: ['HTML', 'CSS', 'JavaScript']
         },
         {
             title: 'Mock Web Hosting Site',
@@ -43,7 +43,7 @@ export default function Projects() {
             image: Proj3,
             liveUrl: 'https://alig023.github.io/COMP213/FinalProject/',
             codeUrl: 'https://github.com/AliG023/COMP213/tree/main/FinalProject',
-            techs: ['HTML', 'CSS', 'JavaScript']
+            tech: ['HTML', 'CSS', 'JavaScript']
         },
         {
             title: 'More To Come',
@@ -51,12 +51,12 @@ export default function Projects() {
             image: '',
             liveUrl: '',
             codeUrl: '',
-            techs: ['JavaScript', 'React', 'Node.js', 'Electron.js']
+            tech: ['JavaScript', 'React', 'Node.js', 'Electron.js']
         }
     ]);
 
     const openProjectModal = () => {
-        setProjectForm({ title: '', description: '', image: '', liveUrl: '', codeUrl: '', techs: '' });
+        setProjectForm({ title: '', description: '', image: '', liveUrl: '', codeUrl: '', tech: '' });
         setIsProjectOpen(true);
     };
     const closeProjectModal = () => setIsProjectOpen(false);
@@ -76,13 +76,13 @@ export default function Projects() {
             image: projectForm.image.trim(), // allow URL or leave empty
             liveUrl: projectForm.liveUrl.trim(),
             codeUrl: projectForm.codeUrl.trim(),
-            techs: projectForm.techs
-                ? projectForm.techs.split(',').map(t => t.trim()).filter(Boolean)
+            tech: projectForm.tech
+                ? projectForm.tech.split(',').map(t => t.trim()).filter(Boolean)
                 : []
         };
 
         setProjects(prev => [newProject, ...prev]);
-        setProjectForm({ title: '', description: '', image: '', liveUrl: '', codeUrl: '', techs: '' });
+        setProjectForm({ title: '', description: '', image: '', liveUrl: '', codeUrl: '', tech: '' });
         closeProjectModal();
     };
 
@@ -159,8 +159,8 @@ export default function Projects() {
                                 <input name="codeUrl" value={projectForm.codeUrl} onChange={handleProjectChange} />
                             </label>
                             <label>
-                                Techs (comma separated)
-                                <input name="techs" value={projectForm.techs} onChange={handleProjectChange} />
+                                Tech (comma separated)
+                                <input name="tech" value={projectForm.tech} onChange={handleProjectChange} />
                             </label>
                             <div className="modal-actions">
                                 <button type="button" onClick={closeProjectModal}>Cancel</button>
