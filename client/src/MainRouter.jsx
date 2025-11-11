@@ -6,6 +6,8 @@ import Contact from './scenes/Contact';
 import Projects from './scenes/Projects';
 import Education from './scenes/Education';
 import Services from './scenes/Services';
+import SignUp from './scenes/SignUp';
+import SignIn from './scenes/SignIn';
 
 export default function MainRouter () {
     return (
@@ -18,6 +20,8 @@ export default function MainRouter () {
                 <Route path='/education' element={<Education />} />
                 <Route path='/service' element={<Services />} />
                 <Route path='/contact' element={<Contact />} />
+                <Route path='/signup' element={<SignUp />} />
+                <Route path='/signin' element={<SignIn />} />
             </Routes>
         </>
     )

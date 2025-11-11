@@ -3,10 +3,10 @@ import crypto from 'crypto'
 import { type } from 'os';
 
 const UserSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
         trim: true,
-        required: 'Name is required'
+        required: 'Username is required'
     },
     email: {
         type: String,
