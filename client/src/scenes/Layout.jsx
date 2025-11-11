@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import AGLogo from '../assets/AG-logo.svg';
+import '../styles/Layout.css';
 
 export default function Layout() {
     // Function to get user info from localStorage
