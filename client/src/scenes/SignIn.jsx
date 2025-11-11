@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
 const SignIn = () => {
     // State for form data
     const [form, setForm] = useState({
@@ -28,7 +26,7 @@ const SignIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${API_URL}/auth/signin`, {
+            const response = await fetch(`/auth/signin`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
