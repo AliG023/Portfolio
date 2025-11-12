@@ -1,129 +1,117 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Education.css';
 
-export default function Education () {
+export default function Education() {
+    const navigate = useNavigate();
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [form, setForm] = useState({ type: 'postsecondary', subject: '', school: '', dates: '' });
-    const [educationList, setEducationList] = useState([
-        { type: 'postsecondary', subject: 'Software Engineer Technology', school: 'Centennial College, Toronto', dates: 'Sep.2024 - Present' },
-        { type: 'postsecondary', subject: 'Aeronautical Engineering', school: 'Defence College of Aeronautical Engineering, England', dates: 'Jun.2010 - Oct.2013' },
-        { type: 'skills', subject: 'Measurement Canada Inspection Technician', school: 'Measurement Canada', dates: 'Jul.2022' },
-        { type: 'skills', subject: 'NFPA 1001 Firefighter I & II', school: 'College of the Rockies', dates: 'Nov.2021' },
-        { type: 'skills', subject: 'NFPA 1071 Hazmat Awareness & Operations', school: 'College of the Rockies', dates: 'Nov.2021' }
+    const [isEducationOpen, setIsEducationOpen] = useState(false);
+    const [educationForm, setEducationForm] = useState({
+        school: '',
+        degree: '',
+        year: '',
+    });
+
+    const [education, setEducation] = useState([
+        {
+            _id: '1',
+            school: 'George Brown College',
+            degree: 'Computer Programming & Analysis',
+            year: '2023 - Present',
+        },
+        {
+            _id: '2',
+            school: 'Toronto Metropolitan University',
+            degree: 'Bachelor of Arts, Sociology',
+            year: '2017 - 2021',
+        },
     ]);
 
-    function openModal() {
-        setForm({ type: 'postsecondary', subject: '', school: '', dates: '' });
-        setIsOpen(true);
-    }
+    const openEducationModal = () => setIsEducationOpen(true);
+    const closeEducationModal = () => setIsEducationOpen(false);
 
-    function closeModal() {
-        setIsOpen(false);
-    }
-
-    function handleChange(e) {
+    const handleEducationChange = (e) => {
         const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }));
-    }
+        setEducationForm(prev => ({ ...prev, [name]: value }));
+    };
 
-    function handleSave(e) {
+    const handleEducationSave = (e) => {
         e.preventDefault();
-        if (!form.subject.trim()) return;
+        if (!educationForm.school.trim() || !educationForm.degree.trim()) return;
 
-        const newEntry = {
-            type: form.type || 'postsecondary',
-            subject: form.subject.trim(),
-            school: form.school.trim(),
-            dates: form.dates.trim()
+        const newEducation = {
+            _id: `new-${Date.now()}`,
+            school: educationForm.school.trim(),
+            degree: educationForm.degree.trim(),
+            year: educationForm.year.trim(),
         };
 
-        setEducationList(prev => [newEntry, ...prev]);
+        setEducation(prev => [newEducation, ...prev]);
+        setEducationForm({ school: '', degree: '', year: '' });
+        closeEducationModal();
+    };
+    
+    const handleDeleteEducation = (educationId) => {
+        setEducation(prev => prev.filter(edu => edu._id !== educationId));
+    };
 
-        setForm({ type: 'postsecondary', subject: '', school: '', dates: '' });
-        closeModal();
-    }
-
-    return(
+    return (
         <>
             <div className='page'>
-                <div className='tables'>
-                    <h2>Post Secondary Education</h2>
-                    <div className='education-table'>
-                        <table>
+                <div className='education-container'>
+                    <h2>My Education</h2>
+                    <div className='education-table-container'>
+                        <table className='education-table'>
                             <thead>
                                 <tr>
-                                    <th>Subject</th>
                                     <th>School</th>
-                                    <th>Dates</th>
+                                    <th>Degree / Certificate</th>
+                                    <th>Year</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {educationList
-                                    .filter(e => e.type === 'postsecondary')
-                                    .map((e, i) => (
-                                        <tr key={i}>
-                                            <td>{e.subject}</td>
-                                            <td>{e.school}</td>
-                                            <td>{e.dates}</td>
-                                        </tr>
-                                    ))
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <button className='Add' onClick={openModal}> Add Education </button>
-                    </div>
-                    <h3>Additional Skills & Certifications</h3>
-                    <div className='skills-table'>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Subject</th>
-                                    <th>School</th>
-                                    <th>Dates</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {educationList
-                                    .filter(e => e.type === 'skills')
-                                    .map((e, i) => (
-                                        <tr key={i}>
-                                            <td>{e.subject}</td>
-                                            <td>{e.school}</td>
-                                            <td>{e.dates}</td>
-                                        </tr>
-                                    ))
-                                }
+                                {education.map((edu) => (
+                                    <tr key={edu._id}>
+                                        <td>{edu.school}</td>
+                                        <td>{edu.degree}</td>
+                                        <td>{edu.year}</td>
+                                        <td>
+                                            <div className='action-buttons'>
+                                                <button className='education-btn' onClick={() => navigate(`/education-details/${edu._id}`)}>Update</button>
+                                                <button className='education-btn secondary' onClick={() => handleDeleteEducation(edu._id)}>Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div>
-                    <button className='Add' onClick={openModal}> Add Certificate </button>
+                    <button className='add-education' onClick={openEducationModal}> Add Education </button>
                 </div>
             </div>
 
-            {isOpen && (
-                <div className="modal-overlay" onClick={closeModal}>
-                    <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-                        <h2>Add Education</h2>
-                        <form onSubmit={handleSave} className="modal-form">
+            {isEducationOpen && (
+                <div className="modal-overlay" onClick={closeEducationModal}>
+                    <div className="modal-card" onClick={e => e.stopPropagation()}>
+                        <h2>Add New Education</h2>
+                        <form className="modal-form" onSubmit={handleEducationSave}>
                             <label>
-                                Subject
-                                <input name="subject" value={form.subject} onChange={handleChange} />
+                                School:
+                                <input type="text" name="school" value={educationForm.school} onChange={handleEducationChange} required />
                             </label>
                             <label>
-                                School
-                                <input name="school" value={form.school} onChange={handleChange} />
+                                Degree / Certificate:
+                                <input type="text" name="degree" value={educationForm.degree} onChange={handleEducationChange} required />
                             </label>
                             <label>
-                                Dates
-                                <input name="dates" value={form.dates} onChange={handleChange} />
+                                Year:
+                                <input type="text" name="year" value={educationForm.year} onChange={handleEducationChange} />
                             </label>
                             <div className="modal-actions">
-                                <button type="button" onClick={closeModal}>Cancel</button>
+                                <button type="button" onClick={closeEducationModal}>Cancel</button>
                                 <button type="submit">Save</button>
                             </div>
                         </form>
@@ -131,5 +119,5 @@ export default function Education () {
                 </div>
             )}
         </>
-    )
+    );
 }

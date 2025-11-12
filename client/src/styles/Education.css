@@ -10,108 +10,135 @@
   margin-bottom: 20px;
 }
 
-.education-table {
-  border-bottom: 2px solid #6e6e6e;
-}
-
-.education-table,
-.skills-table {
+.education-container {
   width: 100%;
-  max-width: 800px;
-  margin-bottom: 40px;
-  display: flex;
-  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
-.education-table table,
-.skills-table table {
+.education-container h2 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  margin-bottom: 2rem;
+  color: #ccd6f6;
+  text-align: center;
+}
+
+.education-table-container {
+  overflow-x: auto;
+  background-color: #112240;
+  border-radius: 4px;
+  border: 1px solid #233554;
+}
+
+.education-table {
   width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  table-layout: fixed;
+  margin: 0;
+  color: #8892b0;
 }
 
 .education-table th,
-.skills-table th {
-  background-color: #6e6e6e;
-  padding: 15px;
-  text-align: center;
-  font-weight: bold;
-  border-bottom: 2px solid #6e6e6e;
+.education-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid #233554;
+  vertical-align: middle;
 }
 
-.education-table th:nth-child(1),
-.skills-table th:nth-child(1) {
-  width: 40%;
+.education-table th {
+  background-color: #112240;
+  color: #ccd6f6;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.education-table th:nth-child(2),
-.skills-table th:nth-child(2) {
-  width: 40%;
+.education-table tr {
+  transition: background-color 0.3s ease;
 }
 
-.education-table th:nth-child(3),
-.skills-table th:nth-child(3) {
-  width: 20%;
-}
-
-.education-table td,
-.skills-table td {
-  padding: 15px;
-  text-align: center;
-  border-bottom: 1px solid #6e6e6e;
-  vertical-align: top;
-}
-
-.education-table tr:hover,
-.skills-table tr:hover {
-  background-color: #9e9e9e;
-}
-
-.education-table tr:last-child td,
-.skills-table tr:last-child td {
+.education-table tr:last-child td {
   border-bottom: none;
 }
 
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-.modal-card {
-  background: #3f3f3f;
-  padding: 20px;
-  width: 90%;
-  max-width: 500px;
-  border-radius: 6px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-.modal-form label {
-  display: block;
-  margin-bottom: 10px;
-}
-.modal-form input {
-  width: 100%;
-  padding: 6px 8px;
-  margin-top: 4px;
-  box-sizing: border-box;
-}
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 12px;
+.education-table tr:hover {
+  background-color: #1d2d50;
 }
 
-.radio-group {
+.education-table td:nth-child(1) {
+  /* School */
+  width: 35%;
+  font-weight: bold;
+  color: #ccd6f6;
+}
+
+.education-table td:nth-child(2) {
+  /* Degree */
+  width: 35%;
+}
+
+.education-table td:nth-child(3) {
+  /* Year */
+  width: 15%;
+}
+
+.education-table td:nth-child(4) {
+  /* Actions */
+  width: 15%;
+}
+
+.action-buttons {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  width: 12vw;
+}
+
+.education-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #64ffda;
+  background-color: transparent;
+  color: #64ffda;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.education-btn:hover {
+  background-color: rgba(100, 255, 218, 0.1);
+}
+
+.education-btn.secondary {
+  border-color: #8892b0;
+  color: #8892b0;
+}
+
+.education-btn.secondary:hover {
+  background-color: #af0000;
+  border-color: #af0000;
+  color: #64ffda;
+}
+
+.add-education {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #64ffda;
+  background-color: #64ffda;
+  color: #0a192f;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1rem;
+  display: block;
+  margin: 2rem auto 0;
+}
+
+.add-education:hover {
+  background-color: transparent;
+  color: #64ffda;
 }

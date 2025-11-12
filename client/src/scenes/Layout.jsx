@@ -37,21 +37,25 @@ export default function Layout() {
                         <h1><em>Alastair Graham - Portfolio</em></h1>
                         <div className='nav-bar'>
                             <nav>
-                                ||<Link to="/">  Home</Link>  |  
+                                ||<Link to="/"> Home</Link>  |  
                                 <Link to="/about"> About</Link>  |
                                 <Link to="/project"> Projects</Link>  |
                                 <Link to="/education"> Education</Link>  | 
                                 <Link to="/service"> Services</Link>  |   
                                 <Link to="/contact"> Contact  </Link>||
                                 {user ? (
-                                    <span className="welcome-logout">
-                                        "Welcome, {user.username} |
-                                        <button className='logOutBtn' onClick={handleLogout}> Logout</button>
-                                    </span>
+                                    <div className="welcome-logout">
+                                        <span className="welcome">
+                                            Welcome, { user.username }
+                                        </span>
+                                        <span className="logout">
+                                            <button className='logOutBtn' onClick={handleLogout}> Logout</button>
+                                        </span>
+                                    </div>
                                     ) : (
                                     <span className="auth-links">
-                                        <Link to="/signup">       SignUp</Link>   |
-                                        <Link to="/signin"> SignIn</Link>
+                                        <Link to="/signup">SignUp</Link>   |
+                                        <Link to="/signin"> SignIn </Link>
                                     </span>
                                 )}
                             </nav>
