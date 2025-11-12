@@ -15,15 +15,15 @@ export default function Education() {
     const [education, setEducation] = useState([
         {
             _id: '1',
-            school: 'George Brown College',
-            degree: 'Computer Programming & Analysis',
-            year: '2023 - Present',
+            school: 'Centennial College - Toronto',
+            degree: 'Associate Degree - Software Engineering Technology',
+            year: '2024 - Present',
         },
         {
             _id: '2',
-            school: 'Toronto Metropolitan University',
-            degree: 'Bachelor of Arts, Sociology',
-            year: '2017 - 2021',
+            school: 'Defence College of Aeronautical Engineering - UK',
+            degree: 'Associate Degree - Aerospace Engineering',
+            year: '2010- 2014',
         },
     ]);
 
