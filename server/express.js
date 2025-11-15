@@ -8,13 +8,18 @@ import authRoutes from './routes/auth.route.js'
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://ali-graham-portfolio.onrender.com'
+];
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compress());
 app.use(helmet());
 app.use(cors({
-    origin: ['http://localhost:5173'],
+    origin: allowedOrigins,
     credentials: true
 }));
 app.use(express.json());

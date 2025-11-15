@@ -29,10 +29,6 @@ app.use('/', UserRouter);
 app.use('/', QualificationsRouter);
 app.use('/', ContactsRouter);
 
-console.log('DEBUG - process.env.PORT:', process.env.PORT);
-console.log('DEBUG - config.port:', config.port);
-console.log('DEBUG - typeof config.port:', typeof config.port);
-
 app.listen(config.port, (err) => { 
     if (err) {
         console.log(err) 
