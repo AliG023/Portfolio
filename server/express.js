@@ -19,6 +19,42 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://ali-graham-portfolio.onrender.com'
+];
+
+app.use((req, res, next) => {
+  const origin = req.get('Origin');
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+
+  // Handle preflight and Private Network Access
+  if (req.method === 'OPTIONS') {
+    if (req.headers['access-control-request-private-network']) {
+      res.setHeader('Access-Control-Allow-Private-Network', 'true');
+    }
+    return res.sendStatus(204);
+  }
+  next();
+});
+
+// You can still use cors() for convenience but keep it after the above or configured similarly
+app.use(cors({
+  origin: (origin, cb) => {
+    // allow non-browser requests (no origin) and allowedOrigins
+    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    cb(new Error('Not allowed by CORS'));
+  },
+  credentials: true
+}));
+
 app.use('/', authRoutes);
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
