@@ -26,7 +26,7 @@ const allowedOrigins = [
 ];
 
 app.use((req, res, next) => {
-  const origin = req.get('Origin');
+  const origin = req.get('Origin') || req.get('origin');
   if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -37,23 +37,14 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
   if (req.method === 'OPTIONS') {
-    // If the browser requested private-network access, allow it for dev
-    if (req.headers['access-control-request-private-network']) {
+    // If the browser asked for Private Network Access, allow it for dev
+    if (req.headers['access-control-request-private-network'] !== undefined) {
       res.setHeader('Access-Control-Allow-Private-Network', 'true');
     }
     return res.sendStatus(204);
   }
   next();
 });
-
-// Optional: keep cors() AFTER the above if you still want to use it for other conveniences
-app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-    cb(new Error('Not allowed by CORS'));
-  },
-  credentials: true
-}));
 
 app.use('/', authRoutes);
 app.use((err, req, res, next) => {
