@@ -13,18 +13,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compress());
 app.use(helmet());
-app.use(cors({
-    origin: ['http://localhost:5173'],
-    credentials: true
-}));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
+// ALLOWED ORIGINS
 const allowedOrigins = [
   'http://localhost:5173',
   'https://ali-graham-portfolio.onrender.com'
 ];
 
+// PNA + CORS preflight handler MUST run before cors() so OPTIONS can return ACA-PN
 app.use((req, res, next) => {
   const origin = req.get('Origin') || req.get('origin');
   if (origin && allowedOrigins.includes(origin)) {
@@ -37,7 +33,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
   if (req.method === 'OPTIONS') {
-    // If the browser asked for Private Network Access, allow it for dev
+    // If browser requested Private Network Access, allow it for dev
     if (req.headers['access-control-request-private-network'] !== undefined) {
       res.setHeader('Access-Control-Allow-Private-Network', 'true');
     }
@@ -45,6 +41,20 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// Use cors with the same allowed origins and credentials after the preflight handler
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow tools / server-to-server requests without origin
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/', authRoutes);
 app.use((err, req, res, next) => {
