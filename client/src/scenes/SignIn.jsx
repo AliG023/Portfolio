@@ -21,11 +21,13 @@ const SignIn = () => {
         setForm({ ...form, [name]: value });
     }
 
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/auth/signin', {
+            const response = await fetch(`${API_URL}/auth/signin`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -81,4 +83,3 @@ const SignIn = () => {
 
 export default SignIn;
 
-      
