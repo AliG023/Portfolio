@@ -5,11 +5,11 @@ import jwt from 'jsonwebtoken'
 
 const signin = async (req, res) => {
     try {
-        let user = await User.findOne({ "email": req.body.email });
+        let user = await User.findOne({ "username": req.body.username });
         if (!user)
             return res.status(401).json({ error: "User not found" });
         if (!user.authenticate(req.body.password)) {
-            return res.status(401).json({ error: "Email and password don't match." });
+            return res.status(401).json({ error: "Username and password don't match." });
         }
 
     const token = generateToken(user);

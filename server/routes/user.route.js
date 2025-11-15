@@ -6,7 +6,7 @@ const UserRouter = express.Router();
 
 // REST API
 UserRouter.post('/api/users', userController.createUser);
-UserRouter.get('/api/users', authController.requireSignin, userController.getAllUsers);
+UserRouter.get('/api/users', userController.getAllUsers);
 UserRouter.get('/api/users/:id', authController.requireSignin, userController.getUserById);
 UserRouter.put('/api/users/:id', authController.requireSignin, authController.hasAuthorization, userController.updateUserById);
 UserRouter.delete('/api/users', authController.requireSignin, userController.deleteAllUsers);

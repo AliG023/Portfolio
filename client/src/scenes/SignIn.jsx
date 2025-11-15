@@ -5,7 +5,6 @@ const SignIn = () => {
     // State for form data
     const [form, setForm] = useState({
         username: '',
-        email: '',
         password: ''
     });
     // State for handling errors
@@ -41,6 +40,7 @@ const SignIn = () => {
 
             const data = await response.json();
             console.log('Sign In Response:', data);
+            
             // Set Token and Username in localStorage
             localStorage.setItem('token', data.token);
             localStorage.setItem('username', data.user.username);
@@ -64,10 +64,6 @@ const SignIn = () => {
                             <div className="form-group">
                                 <label htmlFor="username">Username:</label>
                                 <input type="text" id="username" name="username" value={form.username} onChange={handleChange} required />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email">Email:</label>
-                                <input type="email" id="email" name="email" value={form.email} onChange={handleChange} required />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Password:</label>
