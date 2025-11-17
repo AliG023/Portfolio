@@ -18,6 +18,10 @@ const ProjectSchema = new mongoose.Schema({
     codeUrl: {
         type: String,
         required: 'Code URL is required'
+    },
+    tech: {
+        type: [String],
+        required: 'At least one technology is required'
     }
 });
 

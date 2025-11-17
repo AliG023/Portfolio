@@ -1,25 +1,20 @@
 import mongoose from 'mongoose'
 
 const QualificationSchema = new mongoose.Schema({
-    type: {
-        type: String,
-        trim: true,
-        required: 'Type is required'
-    },
-    Subject: {
-        type: String,
-        trim: true,
-        required: 'Subject is required'
-    },
-    School: {
+    school: {
         type: String,
         trim: true,
         required: 'School is required'
     },
-    Date: {
+    degree: {
         type: String,
         trim: true,
-        required: 'Date is required'
+        required: 'Degree is required'
+    },
+    year: {
+        type: String,
+        trim: true,
+        required: 'Year is required'
     }
 });
 
