@@ -2,7 +2,6 @@
    "name": "React-portfolio",
    "version": "1.0.0",
    "description": "A React portfolio website",
-   "main": "index.js",
    "type": "module",
    "private": true,
    "workspaces": [
@@ -14,7 +13,6 @@
       "build": "npm run build --prefix client",
       "start": "node server/server.js",
       "preview": "npm run preview --prefix client -- --host 0.0.0.0",
-      "type": "module",
       "main": "index.js"
    },
    "dependencies": {
