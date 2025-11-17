@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext.jsx";
 
 const SignUp = () => {
+    const { signUp } = useUser();
     // State for form data
     const [form, setForm] = useState({
         username: '',
         email: '',
         password: ''
     });
+
     // State for handling errors
     const [error, setError] = useState('');
     // Navigation hook
@@ -25,26 +28,10 @@ const SignUp = () => {
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(''); // Clear previous errors
+        
         try {
-            const response = await fetch('api/users', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(form)
-            });
-
-            if(!response.ok) {
-                throw new Error('Sign Up Failed');
-            }
-
-            const data = await response.json();
-
-            // Set Token and Username in localStorage
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('username', data.user.username);
-
-            // Redirect to Home Page after successful signup
+            await signUp(form.username, form.email, form.password);
             navigate('/'); 
         }
         catch (err) {

@@ -1,15 +1,38 @@
 import generateToken from "../utils/jwt.js";
-import userModel from "../models/user.model.js"
+import userModel from "../models/user.model.js";
 
 // CREATE NEW USER
 export const createUser = async (req, res) => {
     try {
-        const newUser = new userModel(req.body);
-        const savedUser = await newUser.save();
-        const token = generateToken(savedUser._id);
-        res.status(201).json({message: 'User created successfully', user: savedUser.username, token });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+        const user = new userModel(req.body);
+        await user.save();
+        
+        const token = generateToken(user);
+        
+        res.json({
+            token,
+            user: {
+                _id: user._id,
+                username: user.username,
+                email: user.email
+            }
+        });
+    } catch (err) {
+        // Handle duplicate key error
+        if (err.code === 11000) {
+            const field = Object.keys(err.keyValue)[0];
+            const message = field === 'email' 
+                ? 'Email already exists. Please use a different email.'
+                : 'User already exists. Please use a different username.';
+            
+            return res.status(400).json({
+                error: message
+            });
+        }
+        
+        return res.status(500).json({
+            error: err.message || 'Could not create user'
+        });
     }
 }
 

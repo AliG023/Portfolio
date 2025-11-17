@@ -4,7 +4,7 @@ const UserContext = createContext();
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export const UserProvider = ({ children }) => {
-        const getUserFromStorage = () => {
+    const getUserFromStorage = () => {
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('username');
 
@@ -18,6 +18,27 @@ export const UserProvider = ({ children }) => {
     useEffect (() => {
         setUser(getUserFromStorage());
     },[])
+
+    const signUp = async (username, email, password) => {
+        const response = await fetch(`${API_URL}/api/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Sign Up Failed');
+        }
+
+        // Set Token and Username in localStorage
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('username', data.user.username);
+        setUser({ username: data.user.username });
+    }
 
     const signIn = async (username, password) => {
         const response = await fetch(`${API_URL}/auth/signin`, {
@@ -54,7 +75,7 @@ export const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, signIn, signOut }}>
+        <UserContext.Provider value={{ user, signUp, signIn, signOut }}>
             {children}
         </UserContext.Provider>
     );

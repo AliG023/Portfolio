@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/usercontext.jsx";
+import { useUser } from "../context/UserContext.jsx";
 
 const SignIn = () => {
     const { signIn } = useUser();
@@ -22,8 +22,6 @@ const SignIn = () => {
 
         setForm({ ...form, [name]: value });
     }
-
-  
 
     // Function to handle form submission
     const handleSubmit = async (e) => {

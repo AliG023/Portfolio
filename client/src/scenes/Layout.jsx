@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import AGLogo from '../assets/AG-logo.svg';
 import '../styles/Layout.css';
-import { useUser } from '../context/usercontext.jsx';
+import { useUser } from '../context/UserContext.jsx';
 
 export default function Layout() {
     // Function to get user info from localStorage
