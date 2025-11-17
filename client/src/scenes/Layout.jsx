@@ -1,30 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import AGLogo from '../assets/AG-logo.svg';
 import '../styles/Layout.css';
+import { useUser } from '../context/usercontext.jsx';
 
 export default function Layout() {
     // Function to get user info from localStorage
-    const getUserFromStorage = () => {
-        const token = localStorage.getItem('token');
-        const username = localStorage.getItem('username');
-
-        return token && username ? { username } : null;
-    };
-
-    // State to hold user information
-    const [user, setUser] = useState(getUserFromStorage());
-
-    // Update user state when localStorage changes
-    useEffect (() => {
-        setUser(getUserFromStorage());
-    },[]);
+    const { user, signOut } = useUser();
+    const nav = useNavigate();
 
     // Function to handle user logout
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
-        setUser(null);
+        signOut();
+        nav('/signin');
     }
 
     return (

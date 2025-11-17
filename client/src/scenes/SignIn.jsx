@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/usercontext.jsx";
 
 const SignIn = () => {
+    const { signIn } = useUser();
     // State for form data
     const [form, setForm] = useState({
         username: '',
@@ -21,31 +23,13 @@ const SignIn = () => {
         setForm({ ...form, [name]: value });
     }
 
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+  
 
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${API_URL}/auth/signin`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify(form)
-            });
-
-            if (!response.ok) {
-                throw new Error('Sign In Failed');
-            }
-
-            const data = await response.json();
-            console.log('Sign In Response:', data);
-            
-            // Set Token and Username in localStorage
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('username', data.user.username);
+            await signIn(form.username, form.password);
 
             // Redirect to Home Page after successful sign in
             navigate('/');
