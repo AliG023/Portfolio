@@ -85,8 +85,8 @@ const SignUp = () => {
                 Role:
                 <select
                   name="role"
-                  value={usersForm.role}
-                  onChange={handleUsersChange}
+                  value={form.role}
+                  onChange={handleChange}
                   required
                 >
                   <option value="user">User</option>
