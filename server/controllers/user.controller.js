@@ -44,16 +44,14 @@ export const createUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   try {
     const users = await userModel.find();
-    res
-      .status(200)
-      .json(
-        users.map((user) => ({
-          _id: user._id,
-          username: user.username,
-          email: user.email,
-          role: user.role,
-        }))
-      );
+    res.status(200).json(
+      users.map((user) => ({
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      }))
+    );
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -83,7 +81,12 @@ export const updateUserById = async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json(updatedUser);
+    res.status(200).json({
+      _id: updatedUser._id,
+      username: updatedUser.username,
+      email: updatedUser.email,
+      role: updatedUser.role,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
