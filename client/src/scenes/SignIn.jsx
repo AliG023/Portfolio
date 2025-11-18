@@ -36,7 +36,6 @@ const SignIn = () => {
     }
   };
 
-  // JSX for the Sign In form
   return (
     <div className="page">
       <div className="contact-container">

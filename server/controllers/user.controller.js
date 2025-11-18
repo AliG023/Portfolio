@@ -47,7 +47,12 @@ export const getAllUsers = async (req, res) => {
     res
       .status(200)
       .json(
-        users.map((user) => ({ username: user.username, email: user.email }))
+        users.map((user) => ({
+          _id: user._id,
+          username: user.username,
+          email: user.email,
+          role: user.role,
+        }))
       );
   } catch (error) {
     res.status(500).json({ message: error.message });

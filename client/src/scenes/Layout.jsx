@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import AGLogo from "../assets/AG-logo.svg";
 import "../styles/Layout.css";
 import { useUser } from "../context/usercontext.jsx";
@@ -33,7 +32,15 @@ export default function Layout() {
               <Link to="/project"> Projects</Link> |
               <Link to="/education"> Education</Link> |
               <Link to="/service"> Services</Link> |
-              <Link to="/contact"> Contact </Link>||
+              {user && user.role === "admin" ? (
+                <div className="admin-link">
+                  <>Admin Tools: </>
+                  ||<Link to="/users"> Users </Link>|
+                  <Link to="/messages"> Messages </Link>||
+                </div>
+              ) : (
+                <Link to="/contact"> Contact </Link>
+              )}
               {user ? (
                 <div className="welcome-logout">
                   <span className="welcome">Welcome, {user.username}</span>
@@ -46,7 +53,7 @@ export default function Layout() {
                 </div>
               ) : (
                 <span className="auth-links">
-                  <Link to="/signup">SignUp</Link> |
+                  || <Link to="/signup">SignUp</Link> |
                   <Link to="/signin"> SignIn </Link>
                 </span>
               )}

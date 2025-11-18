@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Education.css";
+import { useUser } from "../context/usercontext.jsx";
 
 export default function Education() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export default function Education() {
     degree: "",
     year: "",
   });
+  const { user } = useUser();
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -149,7 +151,7 @@ export default function Education() {
                     <th>School</th>
                     <th>Degree / Certificate</th>
                     <th>Year</th>
-                    <th>Actions</th>
+                    {user && user.role === "admin" && <th>Actions</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -165,24 +167,26 @@ export default function Education() {
                         <td>{edu.school}</td>
                         <td>{edu.degree}</td>
                         <td>{edu.year}</td>
-                        <td>
-                          <div className="action-buttons">
-                            <button
-                              className="education-btn"
-                              onClick={() =>
-                                navigate(`/education-details/${edu._id}`)
-                              }
-                            >
-                              Update
-                            </button>
-                            <button
-                              className="education-btn secondary"
-                              onClick={() => handleDeleteEducation(edu._id)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </td>
+                        {user && user.role === "admin" && (
+                          <td>
+                            <div className="action-buttons">
+                              <button
+                                className="education-btn"
+                                onClick={() =>
+                                  navigate(`/education-details/${edu._id}`)
+                                }
+                              >
+                                Update
+                              </button>
+                              <button
+                                className="education-btn secondary"
+                                onClick={() => handleDeleteEducation(edu._id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </td>
+                        )}
                       </tr>
                     ))
                   )}
@@ -191,12 +195,14 @@ export default function Education() {
             </div>
           )}
         </div>
-        <div>
-          <button className="add-education" onClick={openEducationModal}>
-            {" "}
-            Add Education{" "}
-          </button>
-        </div>
+        {user && user.role === "admin" && (
+          <div>
+            <button className="add-education" onClick={openEducationModal}>
+              {" "}
+              Add Education{" "}
+            </button>
+          </div>
+        )}
       </div>
 
       {isEducationOpen && (

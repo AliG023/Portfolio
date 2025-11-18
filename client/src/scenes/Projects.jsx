@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Project.css";
+import { useUser } from "../context/usercontext.jsx";
 
 export default function Projects() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export default function Projects() {
     codeUrl: "",
     tech: "",
   });
+  const { user } = useUser();
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -234,20 +236,24 @@ export default function Projects() {
                             >
                               View Code
                             </button>
-                            <button
-                              className="project-btn"
-                              onClick={() =>
-                                navigate(`/project-details/${p._id}`)
-                              }
-                            >
-                              Update
-                            </button>
-                            <button
-                              className="project-btn secondary"
-                              onClick={() => handleDeleteProject(p._id)}
-                            >
-                              Delete
-                            </button>
+                            {user && user.role === "admin" ? (
+                              <div className="admin-btn">
+                                <button
+                                  className="project-btn"
+                                  onClick={() =>
+                                    navigate(`/project-details/${p._id}`)
+                                  }
+                                >
+                                  Update
+                                </button>
+                                <button
+                                  className="project-btn secondary"
+                                  onClick={() => handleDeleteProject(p._id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            ) : null}
                           </div>
                         </td>
                       </tr>
@@ -258,12 +264,14 @@ export default function Projects() {
             </div>
           )}
         </div>
-        <div>
-          <button className="add-project" onClick={openProjectModal}>
-            {" "}
-            Add Project{" "}
-          </button>
-        </div>
+        {user && user.role === "admin" && (
+          <div>
+            <button className="add-project" onClick={openProjectModal}>
+              {" "}
+              Add Project{" "}
+            </button>
+          </div>
+        )}
       </div>
 
       {isProjectOpen && (
