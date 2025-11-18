@@ -66,7 +66,10 @@ export default function Education() {
     setIsEducationOpen(true);
   };
 
-  const closeEducationModal = () => setIsEducationOpen(false);
+  const closeEducationModal = () => {
+    setIsEducationOpen(false);
+    setEditingEducationId(null);
+  };
 
   const handleEducationChange = (e) => {
     const { name, value } = e.target;
@@ -83,30 +86,48 @@ export default function Education() {
       return;
     }
 
-    const newEducation = {
+    const educationData = {
       school: educationForm.school.trim(),
       degree: educationForm.degree.trim(),
       year: educationForm.year.trim(),
     };
 
     try {
-      const response = await fetch(`${API_URL}/api/qualifications`, {
-        method: "POST",
+      const isEditing = editingEducationId !== null;
+      const url = isEditing
+        ? `${API_URL}/api/qualifications/${editingEducationId}`
+        : `${API_URL}/api/qualifications`;
+      const method = isEditing ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(newEducation),
+        body: JSON.stringify(educationData),
       });
 
       if (response.status === 403) {
-        alert("Admin role required to add education records");
+        alert(
+          `Admin role required to ${
+            isEditing ? "update" : "add"
+          } education records`
+        );
         return;
       }
 
       if (response.ok) {
         const savedEducation = await response.json();
-        setEducation((prev) => [savedEducation, ...prev]);
+        if (isEditing) {
+          setEducation((prev) =>
+            prev.map((edu) =>
+              edu._id === editingEducationId ? savedEducation : edu
+            )
+          );
+        } else {
+          setEducation((prev) => [savedEducation, ...prev]);
+        }
         setEducationForm({ school: "", degree: "", year: "" });
         closeEducationModal();
       }

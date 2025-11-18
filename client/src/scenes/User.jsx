@@ -37,6 +37,7 @@ export default function User() {
         }
 
         const data = await response.json();
+        console.log("Fetched users:", data);
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -48,11 +49,12 @@ export default function User() {
   }, [API_URL]);
 
   const openUsersModal = (user = null) => {
+    console.log("Opening modal with user:", user);
     if (user) {
       setUsersForm({
-        _id: user._id,
-        username: user.username,
-        email: user.email,
+        _id: user._id || "",
+        username: user.username || "",
+        email: user.email || "",
         password: "",
         role: user.role || "user",
       });
@@ -68,7 +70,16 @@ export default function User() {
     setIsUsersOpen(true);
   };
 
-  const closeUsersModal = () => setIsUsersOpen(false);
+  const closeUsersModal = () => {
+    setIsUsersOpen(false);
+    setUsersForm({
+      _id: "",
+      username: "",
+      email: "",
+      password: "",
+      role: "user",
+    });
+  };
 
   const handleUsersChange = (e) => {
     const { name, value } = e.target;
@@ -77,7 +88,16 @@ export default function User() {
 
   const handleUsersSave = async (e) => {
     e.preventDefault();
-    if (!usersForm.username.trim() || !usersForm.email.trim()) return;
+
+    console.log("Saving user with form data:", {
+      ...usersForm,
+      password: "[REDACTED]",
+    });
+
+    if (!usersForm.username.trim() || !usersForm.email.trim()) {
+      alert("Username and email are required");
+      return;
+    }
 
     const token = localStorage.getItem("token");
     if (!token) {
@@ -85,16 +105,16 @@ export default function User() {
       return;
     }
 
-    const isUpdate = usersForm._id !== "";
+    const isUpdate = usersForm._id && usersForm._id.trim() !== "";
 
-    // For updates, only include password if it's been changed
+    // Build user data
     const userData = {
       username: usersForm.username.trim(),
       email: usersForm.email.trim(),
       role: usersForm.role,
     };
 
-    // Only include password if it's provided (for create) or changed (for update)
+    // Only include password if it's provided
     if (usersForm.password.trim()) {
       userData.password = usersForm.password.trim();
     } else if (!isUpdate) {
@@ -108,6 +128,12 @@ export default function User() {
         : `${API_URL}/api/users`;
       const method = isUpdate ? "PUT" : "POST";
 
+      console.log(`Making ${method} request to:`, url);
+      console.log("With data:", {
+        ...userData,
+        password: userData.password ? "[REDACTED]" : undefined,
+      });
+
       const response = await fetch(url, {
         method: method,
         headers: {
@@ -117,13 +143,19 @@ export default function User() {
         body: JSON.stringify(userData),
       });
 
+      console.log("Response status:", response.status);
+
       if (response.status === 403) {
         alert("Admin role required to modify users");
         return;
       }
 
       if (response.ok) {
-        const savedUser = await response.json();
+        const responseData = await response.json();
+        console.log("Response data:", responseData);
+
+        // Handle different response formats
+        const savedUser = responseData.user || responseData;
 
         if (isUpdate) {
           setUsers((prev) =>
@@ -133,17 +165,11 @@ export default function User() {
           setUsers((prev) => [savedUser, ...prev]);
         }
 
-        setUsersForm({
-          _id: "",
-          username: "",
-          email: "",
-          password: "",
-          role: "user",
-        });
         closeUsersModal();
       } else {
         const errorData = await response.json();
-        alert(errorData.error || "Failed to save user");
+        console.error("Error response:", errorData);
+        alert(errorData.error || errorData.message || "Failed to save user");
       }
     } catch (error) {
       console.error("Error saving user:", error);
@@ -152,20 +178,45 @@ export default function User() {
   };
 
   const handleDeleteUser = async (userId) => {
+    if (!userId) {
+      console.error("No user ID provided for deletion");
+      return;
+    }
+
+    if (!window.confirm("Are you sure you want to delete this user?")) {
+      return;
+    }
+
     const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/signin");
+      return;
+    }
+
+    console.log("Deleting user with ID:", userId);
+
     try {
       const response = await fetch(`${API_URL}/api/users/${userId}`, {
         method: "DELETE",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
 
+      console.log("Delete response status:", response.status);
+
       if (response.ok) {
         setUsers((prev) => prev.filter((u) => u._id !== userId));
+        alert("User deleted successfully");
+      } else {
+        const errorData = await response.json();
+        console.error("Delete error:", errorData);
+        alert(errorData.message || "Failed to delete user");
       }
     } catch (error) {
       console.error("Error deleting user:", error);
+      alert("An error occurred while deleting the user");
     }
   };
 
@@ -196,8 +247,8 @@ export default function User() {
                       </td>
                     </tr>
                   ) : (
-                    users.map((u, index) => (
-                      <tr key={u._id || u.username || index}>
+                    users.map((u) => (
+                      <tr key={u._id}>
                         <td>{u.username}</td>
                         <td>{u.email}</td>
                         <td>{u.role || "N/A"}</td>
@@ -211,7 +262,7 @@ export default function User() {
                             </button>
                             <button
                               className="users-btn secondary"
-                              onClick={() => u._id && handleDeleteUser(u._id)}
+                              onClick={() => handleDeleteUser(u._id)}
                             >
                               Delete
                             </button>

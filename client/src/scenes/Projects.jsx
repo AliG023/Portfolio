@@ -362,9 +362,7 @@ export default function Projects() {
                 <button type="button" onClick={closeProjectModal}>
                   Cancel
                 </button>
-                <button type="submit">
-                  {editingProjectId ? "Update" : "Save"}
-                </button>
+                <button type="submit">Save</button>
               </div>
             </form>
           </div>
