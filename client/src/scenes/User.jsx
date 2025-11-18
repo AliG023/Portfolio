@@ -4,7 +4,6 @@ import { useUser } from "../context/usercontext";
 import "../styles/User.css";
 
 export default function User() {
-  const { user } = useUser();
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,14 +47,14 @@ export default function User() {
     fetchUsers();
   }, [API_URL]);
 
-  const openUsersModal = (userData = null) => {
-    if (userData) {
+  const openUsersModal = (user = null) => {
+    if (user) {
       setUsersForm({
-        _id: userData._id,
-        username: userData.username,
-        email: userData.email,
-        password: "", // Don't populate password for security
-        role: userData.role || "user",
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        password: "",
+        role: user.role || "user",
       });
     } else {
       setUsersForm({
@@ -207,14 +206,12 @@ export default function User() {
                             <button
                               className="users-btn"
                               onClick={() => openUsersModal(u)}
-                              disabled={!u._id}
                             >
                               Update
                             </button>
                             <button
                               className="users-btn secondary"
                               onClick={() => u._id && handleDeleteUser(u._id)}
-                              disabled={!u._id}
                             >
                               Delete
                             </button>
