@@ -53,12 +53,19 @@ export const getAllUsers = async (req, res) => {
 // READ USER BY ID
 export const getUserById = async (req, res) => {
   try {
+    console.log("Getting user by ID:", req.params.id);
+
+    if (!req.params.id) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
     const user = await userModel.findById(req.params.id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
   } catch (error) {
+    console.error("Get user by ID error:", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -66,21 +73,25 @@ export const getUserById = async (req, res) => {
 // UPDATE USER BY ID
 export const updateUserById = async (req, res) => {
   try {
+    console.log("Updating user:", req.params.id, req.body);
+
+    if (!req.params.id) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
     const updatedUser = await userModel.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true }
+      { new: true, runValidators: true }
     );
+
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json({
-      _id: updatedUser._id,
-      username: updatedUser.username,
-      email: updatedUser.email,
-      role: updatedUser.role,
-    });
+
+    res.status(200).json(updatedUser);
   } catch (error) {
+    console.error("Update user error:", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -101,12 +112,19 @@ export const deleteAllUsers = async (req, res) => {
 // DELETE USER BY ID
 export const deleteUserById = async (req, res) => {
   try {
+    console.log("Deleting user:", req.params.id);
+
+    if (!req.params.id) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
     const deletedUser = await userModel.findByIdAndDelete(req.params.id);
     if (!deletedUser) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
+    console.error("Delete user error:", error);
     res.status(500).json({ message: error.message });
   }
 };
