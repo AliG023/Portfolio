@@ -9,7 +9,7 @@ const SignUp = () => {
     username: "",
     email: "",
     password: "",
-    isAdmin: false,
+    role: "user",
   });
 
   // State for handling errors
@@ -29,10 +29,10 @@ const SignUp = () => {
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
+    setError("");
 
     try {
-      await signUp(form.username, form.email, form.password, form.isAdmin);
+      await signUp(form.username, form.email, form.password, form.role);
       navigate("/");
     } catch (err) {
       setError(err.message);
