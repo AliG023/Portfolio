@@ -44,14 +44,7 @@ export const createUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   try {
     const users = await userModel.find();
-    res.status(200).json(
-      users.map((user) => ({
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-      }))
-    );
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

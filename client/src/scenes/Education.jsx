@@ -8,6 +8,7 @@ export default function Education() {
   const [education, setEducation] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEducationOpen, setIsEducationOpen] = useState(false);
+  const [editingEducationId, setEditingEducationId] = useState(null);
   const [educationForm, setEducationForm] = useState({
     school: "",
     degree: "",
@@ -52,6 +53,16 @@ export default function Education() {
 
   const openEducationModal = () => {
     setEducationForm({ school: "", degree: "", year: "" });
+    setIsEducationOpen(true);
+  };
+
+  const openEditModal = (edu) => {
+    setEditingEducationId(edu._id);
+    setEducationForm({
+      school: edu.school,
+      degree: edu.degree,
+      year: edu.year,
+    });
     setIsEducationOpen(true);
   };
 
@@ -172,9 +183,7 @@ export default function Education() {
                             <div className="action-buttons">
                               <button
                                 className="education-btn"
-                                onClick={() =>
-                                  navigate(`/education-details/${edu._id}`)
-                                }
+                                onClick={() => openEditModal(edu)}
                               >
                                 Update
                               </button>
@@ -208,7 +217,7 @@ export default function Education() {
       {isEducationOpen && (
         <div className="modal-overlay" onClick={closeEducationModal}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <h2>Add New Education</h2>
+            <h2>{editingEducationId ? "Edit Education" : "Add Education"}</h2>
             <form className="modal-form" onSubmit={handleEducationSave}>
               <label>
                 School *:

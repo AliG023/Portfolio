@@ -8,6 +8,7 @@ export default function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isProjectOpen, setIsProjectOpen] = useState(false);
+  const [editingProjectId, setEditingProjectId] = useState(null);
   const [projectForm, setProjectForm] = useState({
     title: "",
     description: "",
@@ -87,6 +88,7 @@ export default function Projects() {
   };
 
   const openProjectModal = () => {
+    setEditingProjectId(null);
     setProjectForm({
       title: "",
       description: "",
@@ -98,7 +100,23 @@ export default function Projects() {
     setIsProjectOpen(true);
   };
 
-  const closeProjectModal = () => setIsProjectOpen(false);
+  const openEditModal = (project) => {
+    setEditingProjectId(project._id);
+    setProjectForm({
+      title: project.title,
+      description: project.description,
+      image: project.image || "",
+      liveUrl: project.liveUrl || "",
+      codeUrl: project.codeUrl || "",
+      tech: Array.isArray(project.tech) ? project.tech.join(", ") : "",
+    });
+    setIsProjectOpen(true);
+  };
+
+  const closeProjectModal = () => {
+    setIsProjectOpen(false);
+    setEditingProjectId(null);
+  };
 
   const handleProjectChange = (e) => {
     const { name, value } = e.target;
@@ -115,7 +133,7 @@ export default function Projects() {
       return;
     }
 
-    const newProject = {
+    const projectData = {
       title: projectForm.title.trim(),
       description: projectForm.description.trim(),
       image: projectForm.image.trim(),
@@ -130,23 +148,37 @@ export default function Projects() {
     };
 
     try {
-      const response = await fetch(`${API_URL}/api/projects`, {
-        method: "POST",
+      const isEditing = editingProjectId !== null;
+      const url = isEditing
+        ? `${API_URL}/api/projects/${editingProjectId}`
+        : `${API_URL}/api/projects`;
+      const method = isEditing ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(newProject),
+        body: JSON.stringify(projectData),
       });
 
       if (response.status === 403) {
-        alert("Admin role required to create projects");
+        alert(
+          `Admin role required to ${isEditing ? "update" : "create"} projects`
+        );
         return;
       }
 
       if (response.ok) {
         const savedProject = await response.json();
-        setProjects((prev) => [savedProject, ...prev]);
+        if (isEditing) {
+          setProjects((prev) =>
+            prev.map((p) => (p._id === editingProjectId ? savedProject : p))
+          );
+        } else {
+          setProjects((prev) => [savedProject, ...prev]);
+        }
         setProjectForm({
           title: "",
           description: "",
@@ -240,9 +272,7 @@ export default function Projects() {
                               <div className="admin-btn">
                                 <button
                                   className="project-btn"
-                                  onClick={() =>
-                                    navigate(`/project-details/${p._id}`)
-                                  }
+                                  onClick={() => openEditModal(p)}
                                 >
                                   Update
                                 </button>
@@ -277,7 +307,7 @@ export default function Projects() {
       {isProjectOpen && (
         <div className="modal-overlay" onClick={closeProjectModal}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <h2>Add Project</h2>
+            <h2>{editingProjectId ? "Edit Project" : "Add Project"}</h2>
             <form onSubmit={handleProjectSave} className="modal-form">
               <label>
                 Title *
@@ -332,7 +362,9 @@ export default function Projects() {
                 <button type="button" onClick={closeProjectModal}>
                   Cancel
                 </button>
-                <button type="submit">Save</button>
+                <button type="submit">
+                  {editingProjectId ? "Update" : "Save"}
+                </button>
               </div>
             </form>
           </div>
