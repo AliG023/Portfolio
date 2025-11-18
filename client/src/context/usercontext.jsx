@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
     setUser(getUserFromStorage());
   }, []);
 
-  const signUp = async (username, email, password, isAdmin = false) => {
+  const signUp = async (username, email, password, role) => {
     const response = await fetch(`${API_URL}/api/users`, {
       method: "POST",
       headers: {
