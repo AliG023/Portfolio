@@ -107,14 +107,12 @@ export default function User() {
 
     const isUpdate = usersForm._id && usersForm._id.trim() !== "";
 
-    // Build user data
     const userData = {
       username: usersForm.username.trim(),
       email: usersForm.email.trim(),
       role: usersForm.role,
     };
 
-    // Only include password if it's provided
     if (usersForm.password.trim()) {
       userData.password = usersForm.password.trim();
     } else if (!isUpdate) {
@@ -153,8 +151,6 @@ export default function User() {
       if (response.ok) {
         const responseData = await response.json();
         console.log("Response data:", responseData);
-
-        // Handle different response formats
         const savedUser = responseData.user || responseData;
 
         if (isUpdate) {

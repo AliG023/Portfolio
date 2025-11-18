@@ -12,10 +12,8 @@ export const UserProvider = ({ children }) => {
     return token && username ? { username, role } : null;
   };
 
-  // State to hold user information
   const [user, setUser] = useState(getUserFromStorage());
 
-  // Update user state when localStorage changes
   useEffect(() => {
     setUser(getUserFromStorage());
   }, []);
@@ -30,7 +28,7 @@ export const UserProvider = ({ children }) => {
         username,
         email,
         password,
-        role: isAdmin ? "admin" : "user",
+        role,
       }),
     });
 
@@ -76,7 +74,7 @@ export const UserProvider = ({ children }) => {
     }).then(() => {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
-      localStorage.removeItem("role"); // Add this line
+      localStorage.removeItem("role");
       setUser(null);
     });
   };
