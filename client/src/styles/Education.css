@@ -91,11 +91,10 @@
 }
 
 .action-buttons {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  width: 12vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  width: 100%; /* Changed from fixed 12vw */
 }
 
 .education-btn {
@@ -107,6 +106,8 @@
   transition: background-color 0.3s, color 0.3s;
   border-radius: 4px;
   font-size: 0.9rem;
+  white-space: nowrap; /* Prevents text wrapping */
+  width: 100%; /* Makes both buttons fill their grid cell equally */
 }
 
 .education-btn:hover {
