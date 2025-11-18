@@ -81,15 +81,17 @@ const SignUp = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="isAdmin">
-                <input
-                  type="checkbox"
-                  id="isAdmin"
-                  name="isAdmin"
-                  checked={form.isAdmin}
-                  onChange={handleChange}
-                />{" "}
-                Create as Admin
+              <label>
+                Role:
+                <select
+                  name="role"
+                  value={usersForm.role}
+                  onChange={handleUsersChange}
+                  required
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
               </label>
             </div>
             <div className="form-actions">

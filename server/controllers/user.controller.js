@@ -9,12 +9,11 @@ export const createUser = async (req, res) => {
       password: "[REDACTED]",
     });
 
-    // Ensure role is included
     const userData = {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      role: req.body.role || "user", // Default to "user" if not provided
+      role: req.body.role || "user",
     };
 
     const user = new userModel(userData);
