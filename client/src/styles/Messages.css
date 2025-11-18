@@ -10,7 +10,7 @@
   margin-bottom: 20px;
 }
 
-.education-container {
+.messages-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -18,36 +18,36 @@
   text-align: center;
 }
 
-.education-container h2 {
+.messages-container h2 {
   font-size: clamp(2rem, 5vw, 2.5rem);
   margin-bottom: 2rem;
   color: #ccd6f6;
   text-align: center;
 }
 
-.education-table-container {
+.messages-table-container {
   overflow-x: auto;
   background-color: #112240;
   border-radius: 4px;
   border: 1px solid #233554;
 }
 
-.education-table {
+.messages-table {
   width: 100%;
   border-collapse: collapse;
   margin: 0;
   color: #8892b0;
 }
 
-.education-table th,
-.education-table td {
+.messages-table th,
+.messages-table td {
   padding: 1rem 1.5rem;
   text-align: left;
   border-bottom: 1px solid #233554;
   vertical-align: middle;
 }
 
-.education-table th {
+.messages-table th {
   background-color: #112240;
   color: #ccd6f6;
   font-weight: 600;
@@ -56,36 +56,36 @@
   text-transform: uppercase;
 }
 
-.education-table tr {
+.messages-table tr {
   transition: background-color 0.3s ease;
 }
 
-.education-table tr:last-child td {
+.messages-table tr:last-child td {
   border-bottom: none;
 }
 
-.education-table tr:hover {
+.messages-table tr:hover {
   background-color: #1d2d50;
 }
 
-.education-table td:nth-child(1) {
+.messages-table td:nth-child(1) {
   /* School */
   width: 35%;
   font-weight: bold;
   color: #ccd6f6;
 }
 
-.education-table td:nth-child(2) {
+.messages-table td:nth-child(2) {
   /* Degree */
   width: 35%;
 }
 
-.education-table td:nth-child(3) {
+.messages-table td:nth-child(3) {
   /* Year */
   width: 15%;
 }
 
-.education-table td:nth-child(4) {
+.messages-table td:nth-child(4) {
   /* Actions */
   width: 15%;
 }
@@ -97,7 +97,7 @@
   width: 100%; /* Changed from fixed 12vw */
 }
 
-.education-btn {
+.messages-btn {
   padding: 0.5rem 1rem;
   border: 1px solid #64ffda;
   background-color: transparent;
@@ -110,36 +110,17 @@
   width: 100%; /* Makes both buttons fill their grid cell equally */
 }
 
-.education-btn:hover {
+.messages-btn:hover {
   background-color: rgba(100, 255, 218, 0.1);
 }
 
-.education-btn.secondary {
+.messages-btn.secondary {
   border-color: #8892b0;
   color: #8892b0;
 }
 
-.education-btn.secondary:hover {
+.messages-btn.secondary:hover {
   background-color: #af0000;
   border-color: #af0000;
-  color: #64ffda;
-}
-
-.add-education {
-  padding: 0.75rem 1.5rem;
-  border: 1px solid #64ffda;
-  background-color: #64ffda;
-  color: #0a192f;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 1rem;
-  display: block;
-  margin: 2rem auto 0;
-}
-
-.add-education:hover {
-  background-color: transparent;
   color: #64ffda;
 }

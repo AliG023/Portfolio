@@ -123,7 +123,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
-  width: 220px; /* Adjust this width as needed */
+  width: 100%; /* Changed from fixed 220px */
 }
 
 .project-btn {
@@ -135,6 +135,8 @@
   transition: background-color 0.3s, color 0.3s;
   border-radius: 4px;
   font-size: 0.9rem;
+  white-space: nowrap; /* Prevents text wrapping */
+  width: 100%; /* Makes all buttons fill their grid cell equally */
 }
 
 .project-btn:hover {
