@@ -1,13 +1,17 @@
 import '../styles/About.css';
 import resume from '../assets/Alastair Graham - Resume.pdf';
 import head_shot from '../assets/head-shot.png';
+import { useState } from "react";
+
 export default function About() {
+  const [showResume, setShowResume] = useState(false);
+
     return (
         <>
             <div className='page'>
                 <h2>About Me:</h2>
                     <div className='selfie-container'>
-                        <img className='head-shot' src={head_shot} alt="Head Shot"/>
+                        <img className='head-shot' src={head_shot} alt="Head Shot" loading='lazy'/>
                     </div>
                     <div className='intro'>
                         <h3>Alastair Graham</h3>
@@ -15,13 +19,19 @@ export default function About() {
                     </div>
                     <div className='attachment'>
                         <div className='resume-frame'>
-                            <iframe
-                                src={resume}
-                                title="Resume"
-                                width="100%"
-                                height="600px"
-                                style={{ border: "1px solid #ccc", borderRadius: "8px" }}
-                            ></iframe>
+                            <button onClick={() => setShowResume(true)} className="resume-button">
+                                Show Resume
+                            </button>
+
+                            {showResume && (
+                                <iframe
+                                    src={resume}
+                                    title="Resume"
+                                    width="100%"
+                                    height="600px"
+                                    style={{ border: "1px solid #ccc", borderRadius: "8px" }}
+                                ></iframe>
+                            )}
                         </div>
                     </div>
             </div>
